@@ -1,9 +1,3 @@
-//
-// KKArrayExtensions.swift
-//
-// Copyright (c) 2008-2017 KKBOX Taiwan Co., Ltd. All Rights Reserved.
-//
-
 import Foundation
 
 extension Array {

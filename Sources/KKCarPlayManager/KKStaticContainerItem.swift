@@ -8,7 +8,7 @@ public class KKStaticContainerItem: KKBasicContentItem {
 		self.children = children
 	}
 
-	convenience init(identifier: String, title: String, @KKCarPlayItemsBuilder builder:()->[KKBasicContentItem]) {
+	public convenience init(identifier: String, title: String, @KKCarPlayItemsBuilder builder:()->[KKBasicContentItem]) {
 		self.init(identifier:identifier, title: title, children:builder())
 	}
 }
