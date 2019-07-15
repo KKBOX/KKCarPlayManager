@@ -13,10 +13,10 @@ public class KKStaticContainerItem: KKBasicContentItem {
 	public init(identifier: String, title: String, children: [KKBasicContentItem]) {
 		self.staticChildren = children
 		super.init(identifier: identifier)
-		isPlayable = false
-		isContainer = true
 		self.title = title
 		self.children = children
+		isPlayable = false
+		isContainer = true
 	}
 
 	/// :nodoc:

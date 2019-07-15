@@ -24,18 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 
 		let rooNode = KKStaticContainerItem(identifier: "root", title: "Root", children: [
-			KKStaticContainerItem(identifier: "folder 1", title: "Folder 1", children: [
-				PlayItem(identifier: "Song 1 1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
-				PlayItem(identifier: "Song 1 2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
+			KKStaticContainerItem(identifier: "folder1", title: "Folder 1", children: [
+				PlayItem(identifier: "Song_1_1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
+				PlayItem(identifier: "Song_1_2", title: "回向", url: "https://zonble.net/MIDI/return.mp3"),
 				]),
-			KKStaticContainerItem(identifier: "folder 2", title: "Folder 2", children: [
-				PlayItem(identifier: "Song 2 1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
-				PlayItem(identifier: "Song 2 2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
+			KKStaticContainerItem(identifier: "folder_2", title: "Folder 2", children: [
+				PlayItem(identifier: "Song_2_1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
+				PlayItem(identifier: "Song_2_2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
 				]),
-//			KKStaticContainerItem(identifier: "folder 3", title: "Folder 3", children: [
-//				PlayItem(identifier: "Song 3 1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
-//				PlayItem(identifier: "Song 3 2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
-//				])
 			]
 		)
 		manager = KKCarPlayManager(rootNode: rooNode)

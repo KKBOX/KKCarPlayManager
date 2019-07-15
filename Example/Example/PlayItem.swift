@@ -13,9 +13,9 @@ class PlayItem: KKBasicContentItem {
 	public init(identifier: String, title: String, url urlString: String) {
 		super.init(identifier: identifier)
 		self.title = title
-		self.url = URL(string: urlString)
-		self.isContainer = true
-		self.isPlayable = false
+		url = URL(string: urlString)
+		isContainer = false
+		isPlayable = true
 	}
 
 	override func play(completionHandler: @escaping (Error?) -> Void) throws -> Bool {
