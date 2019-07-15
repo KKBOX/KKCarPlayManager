@@ -31,7 +31,12 @@ public class KKCarPlayManager: NSObject {
 		MPPlayableContentManager.shared().delegate = nil
 	}
 
-	final var rootNode: KKBasicContentItem
+	final var rootNode: KKBasicContentItem {
+		didSet {
+			MPPlayableContentManager.shared().beginUpdates()
+			MPPlayableContentManager.shared().endUpdates()
+		}
+	}
 	final var currentPlaybackCallback: ((Error?) -> Void)?
 
 	public init(rootNode: KKBasicContentItem) {

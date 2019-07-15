@@ -1,20 +1,42 @@
-//
-//  ViewController.swift
-//  Example
-//
-//  Created by zonble on 7/15/19.
-//  Copyright © 2019 KKBOX. All rights reserved.
-//
-
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController {
+typealias PlayableItem = (String, String)
+
+class ViewController: UITableViewController {
+	var items:[[PlayableItem]] = [[
+		("天狗", "https://zonble.net/MIDI/tiengo.mp3"),
+		("回向", "https://zonble.net/MIDI/return.mp3"),
+		]
+	]
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view.
+		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+		self.title = "KKCarPlayManager Example"
 	}
 
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return items.count
+	}
 
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return items[section].count
+	}
+
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		cell.textLabel?.text = items[indexPath.section][indexPath.row].0
+		return cell
+	}
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+		let urlString = items[indexPath.section][indexPath.row].1
+		if let url = URL(string: urlString) {
+			appDelegate().player.replaceCurrentItem(with: AVPlayerItem(url: url))
+			appDelegate().player.play()
+		}
+	}
 }
 

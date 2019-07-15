@@ -1,0 +1,18 @@
+PODS:
+  - KKCarPlayManager (0.1.0):
+    - KKCarPlayManager/KKCarPlayManager (= 0.1.0)
+  - KKCarPlayManager/KKCarPlayManager (0.1.0)
+
+DEPENDENCIES:
+  - KKCarPlayManager (from `../`)
+
+EXTERNAL SOURCES:
+  KKCarPlayManager:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  KKCarPlayManager: 30a1830b2902b62dac1ff28d4f31184365897f7a
+
+PODFILE CHECKSUM: fc55f97309a5993266f2ac5262bab1b28ae05619
+
+COCOAPODS: 1.7.1

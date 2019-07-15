@@ -10,7 +10,10 @@ let package = Package(
         .library(
             name: "KKCarPlayManager",
             targets: ["KKCarPlayManager"]),
-    ],
+		.library(
+			name: "KKCarPlayManagerExtension",
+			targets: ["KKCarPlayManagerExtensions"]),
+		],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
@@ -21,6 +24,9 @@ let package = Package(
         .target(
             name: "KKCarPlayManager",
             dependencies: []),
+        .target(
+            name: "KKCarPlayManagerExtensions",
+            dependencies: ["KKCarPlayManager"]),
         .testTarget(
             name: "KKCarPlayManagerTests",
             dependencies: ["KKCarPlayManager"]),

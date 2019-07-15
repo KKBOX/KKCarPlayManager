@@ -1,39 +1,45 @@
 import UIKit
-import MediaPlayer
-import AVFoundation
 import KKCarPlayManager
+import MediaPlayer
+
+func appDelegate() -> AppDelegate {
+	return UIApplication.shared.delegate as! AppDelegate
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-	var carplayManager: KKCarPlayManager?
+	var window: UIWindow?
+	var manager: KKCarPlayManager?
+	var player = AVPlayer()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		MPRemoteCommandCenter.shared().playCommand.addTarget { _ in .success }
-		MPRemoteCommandCenter.shared().pauseCommand.addTarget { _ in .success }
-		MPRemoteCommandCenter.shared().stopCommand.addTarget { _ in .success }
-		MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget { _ in .success }
-		let rootNode = KKStaticContainerItem(identifier: "root", title: "Root") {
-			KKBasicContentItem(identifier: "item 1")
-			KKBasicContentItem(identifier: "item 2")
-			KKBasicContentItem(identifier: "item 3")
+		let vc = ViewController()
+		let nav = UINavigationController(rootViewController: vc)
+		window = UIWindow(frame: UIScreen.main.bounds)
+		window?.rootViewController = nav
+		window?.makeKeyAndVisible()
+
+		MPRemoteCommandCenter.shared().playCommand.addTarget { event in
+			return .success
 		}
-		carplayManager = KKCarPlayManager(rootNode: rootNode)
-		carplayManager?.activate()
-		try? AVAudioSession.sharedInstance().setCategory(.playback)
-		try? AVAudioSession.sharedInstance().setActive(true, options: [])
+
+		let rooNode = KKStaticContainerItem(identifier: "root", title: "Root", children: [
+			KKStaticContainerItem(identifier: "folder 1", title: "Folder 1", children: [
+				PlayItem(identifier: "Song 1 1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
+				PlayItem(identifier: "Song 1 2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
+				]),
+			KKStaticContainerItem(identifier: "folder 2", title: "Folder 2", children: [
+				PlayItem(identifier: "Song 2 1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
+				PlayItem(identifier: "Song 2 2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
+				]),
+//			KKStaticContainerItem(identifier: "folder 3", title: "Folder 3", children: [
+//				PlayItem(identifier: "Song 3 1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
+//				PlayItem(identifier: "Song 3 2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
+//				])
+			]
+		)
+		manager = KKCarPlayManager(rootNode: rooNode)
+		manager?.activate()
 		return true
 	}
-
-	func applicationWillTerminate(_ application: UIApplication) {
-	}
-
-	// MARK: UISceneSession Lifecycle
-
-	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-		return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-	}
-
-	func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-	}
-
 }
