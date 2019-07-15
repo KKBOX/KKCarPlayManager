@@ -1,10 +1,14 @@
 import Foundation
 import MediaPlayer
 
+/// The error used in `KKCarPlayManager`.
 public enum KKCarPlayManagerError : Error, LocalizedError {
+	/// The item does not exist.
 	case itemNotExist
+	/// An error with a message.
 	case message(String)
 
+	/// :nodoc:
 	public var errorDescription: String? {
 		switch self {
 		case .itemNotExist:
@@ -26,11 +30,13 @@ public class KKCarPlayManager: NSObject {
 		MPPlayableContentManager.shared().endUpdates()
 	}
 
+	/// Set the data source and delegate of MPPlayableContentManager to nil.
 	public func deactivate() {
 		MPPlayableContentManager.shared().dataSource = nil
 		MPPlayableContentManager.shared().delegate = nil
 	}
 
+	/// The root node of KKCarPlayManager.
 	final var rootNode: KKBasicContentItem {
 		didSet {
 			MPPlayableContentManager.shared().beginUpdates()
@@ -39,18 +45,19 @@ public class KKCarPlayManager: NSObject {
 	}
 	final var currentPlaybackCallback: ((Error?) -> Void)?
 
+	/// Creates a new instance.
+	/// - Parameter rootNode: The root node.
 	public init(rootNode: KKBasicContentItem) {
 		self.rootNode = rootNode
 		super.init()
 	}
 
-	/**
-	Travel through the tree to find a specific node by giving the
-	index path of the node.
 
-	- parameter indexPath: Index path of the node.
-	- returns: The node found in the tree.
-	*/
+	/// Travel through the tree to find a specific node by giving the
+	/// index path of the node.
+	///
+	/// - parameter indexPath: Index path of the node.
+	/// - returns: The node found in the tree.
 	fileprivate func travel(_ indexPath: IndexPath) -> KKBasicContentItem? {
 		if indexPath.count == 0 {
 			return self.rootNode
@@ -88,16 +95,19 @@ public class KKCarPlayManager: NSObject {
 }
 
 extension KKCarPlayManager: MPPlayableContentDataSource {
+	/// :nodoc:
 	public final func numberOfChildItems(at indexPath: IndexPath) -> Int {
 		let node = self.travel(indexPath)
 		return node?.children?.count ?? 0
 	}
 
+	/// :nodoc:
 	public final func contentItem(at indexPath: IndexPath) -> MPContentItem? {
 		let node = self.travel(indexPath)
 		return node
 	}
 
+	/// :nodoc:
 	@objc(beginLoadingChildItemsAtIndexPath:completionHandler:)
 	public final func beginLoadingChildItems(at indexPath: IndexPath, completionHandler: @escaping (Error?) -> ()) {
 		func continueLoadingChildren() {
@@ -132,7 +142,7 @@ extension KKCarPlayManager: MPPlayableContentDataSource {
 }
 
 extension KKCarPlayManager: MPPlayableContentDelegate {
-
+	/// :nodoc:
 	public final func playableContentManager(_ contentManager: MPPlayableContentManager, initiatePlaybackOfContentItemAt indexPath: IndexPath, completionHandler: @escaping (Error?) -> Void) {
 		DispatchQueue.main.async { [weak self] in
 			if let strongSelf = self {
