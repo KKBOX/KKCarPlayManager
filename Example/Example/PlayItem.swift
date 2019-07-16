@@ -1,6 +1,7 @@
 import Foundation
 import KKCarPlayManager
 import AVFoundation
+import MediaPlayer
 
 enum PlayItemError: Error {
 	case noURL
@@ -25,6 +26,11 @@ class PlayItem: KKBasicContentItem {
 		}
 		appDelegate().player.replaceCurrentItem(with: AVPlayerItem(url: url))
 		appDelegate().player.play()
+		MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+			MPMediaItemPropertyPersistentID: 0,
+			MPMediaItemPropertyTitle: self.title ?? "",
+			MPMediaItemPropertyArtist: "zonble"
+		]
 		completionHandler(nil)
 		return true
 	}

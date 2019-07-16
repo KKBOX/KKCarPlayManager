@@ -1,5 +1,6 @@
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 typealias PlayableItem = (String, String)
 
@@ -36,9 +37,15 @@ class ViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		let urlString = items[indexPath.section][indexPath.row].1
+		let name = items[indexPath.section][indexPath.row].0
 		if let url = URL(string: urlString) {
 			appDelegate().player.replaceCurrentItem(with: AVPlayerItem(url: url))
 			appDelegate().player.play()
+			MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+				MPMediaItemPropertyPersistentID: 0,
+				MPMediaItemPropertyTitle: name,
+				MPMediaItemPropertyArtist: "zonble"
+			]
 		}
 	}
 }
