@@ -25,3 +25,17 @@ open class KKBasicContentItem: MPContentItem {
 		fatalError("Not implemented")
 	}
 }
+
+extension KKBasicContentItem {
+
+	/// Apply an image to the current item.
+	public func apply(image: UIImage?) -> KKBasicContentItem {
+		if let image = image {
+			self.artwork = MPMediaItemArtwork(image: image)
+		} else {
+			self.artwork = nil
+		}
+		return self
+	}
+
+}

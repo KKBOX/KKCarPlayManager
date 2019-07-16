@@ -6,10 +6,10 @@ Pod::Spec.new do |s|
 KKCarPlayManager helps you to build the tree of the content items to let users to browsw on a CarPlay audio app.
                        DESC
 
-  s.homepage         = 'https://github.com/zonble/KKCarPlayManager'
+  s.homepage         = 'https://github.com/KKBOX/KKCarPlayManager'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'zonble' => 'zonble@gmail.com' }
-  s.source           = { :git => 'https://github.com/zonble/KKCarPlayManager.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/KKBOX/KKCarPlayManager.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
   s.swift_versions = ['4.2', '5.0', '5.1']

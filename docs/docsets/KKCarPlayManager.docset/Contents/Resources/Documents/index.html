@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>KKCarPlayManager  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="KKCarPlayManager  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">KKCarPlayManager Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">KKCarPlayManager Reference</a>
+        <img id="carat" src="img/carat.png" />
+        KKCarPlayManager  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/KKBasicContentItem.html">KKBasicContentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KKCarPlayManager.html">KKCarPlayManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KKStaticContainerItem.html">KKStaticContainerItem</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/KKCarPlayManagerError.html">KKCarPlayManagerError</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='kkcarplaymanager' class='heading'>KKCarPlayManager</h1>
+
+<p><strong>KKCarPlayManager</strong> provides a simple, clear and declarative way to implement
+the functionalities of <a href="https://www.apple.com/ios/carplay/">CarPlay</a>.</p>
+<h2 id='requirement' class='heading'>Requirement</h2>
+
+<ul>
+<li>Xcode</li>
+<li>Swift 4.2 or above</li>
+<li>iOS 8.0 or above</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>You can install the package via Swift Package Manager or CocoaPods.</p>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
+
+<p>Add <code><a href="Classes/KKCarPlayManager.html">KKCarPlayManager</a></code> to your pod file, then run <code>pod install</code>.</p>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Just add <code>https://github.com/KKBOX/KKCarPlayManager.git</code> to your <code>Package.swift</code>
+file, or, you can add the package in Xcode 11 by selecting <q>File</q> -&gt; <q>Swift
+Packages</q> -&gt; <q>Add Package Dependency</q>.</p>
+<h2 id='example' class='heading'>Example</h2>
+
+<p>The project has an example project. Go to the <code>Example</code> folder, run <code>pod install</code>,
+open <code>Example.xcworkspace</code>, build and run the example app.</p>
+<h2 id='getting-started' class='heading'>Getting Started</h2>
+
+<p>Apple does not allow a CarPlay audio app to customize user interface./ You don&rsquo;t
+call any method on CarPlay, but let
+<a href="https://developer.apple.com/documentation/mediaplayer/mpplayablecontentmanager">MPPlayableContentManager</a>
+to call you, discover your contents, and list them in a structured table user
+interface.</p>
+
+<p>KKCarPlayManager helps you to build your contents into a tree to be discovered.
+KKCarPlayManager already implemented the data source and delegate of
+MPPlayableContentManager for you, and all you need to do is to give
+KKCarPlayManager a root node and its subnodes. For example:</p>
+<pre class="highlight swift"><code><span class="c1">// Import required modules.</span>
+
+<span class="kd">import</span> <span class="kt">KKCarPlayManager</span>
+<span class="kd">import</span> <span class="kt">MediaPlayer</span>
+<span class="kd">import</span> <span class="kt">AVFoundation</span>
+
+<span class="c1">// You should set at least one command of MPRemoteCommandCenter, otherwise</span>
+<span class="c1">// MPPlayableContentManager won't call it data source and delegate.</span>
+<span class="kt">MPRemoteCommandCenter</span><span class="o">.</span><span class="nf">shared</span><span class="p">()</span><span class="o">.</span><span class="n">playCommand</span><span class="o">.</span><span class="n">addTarget</span> <span class="p">{</span> <span class="n">event</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="o">.</span><span class="n">success</span>
+<span class="p">}</span>
+
+<span class="c1">// Create a root node.</span>
+<span class="k">let</span> <span class="nv">rooNode</span> <span class="o">=</span> <span class="kt">KKStaticContainerItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"root"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Root"</span><span class="p">,</span> <span class="nv">children</span><span class="p">:</span> <span class="p">[</span>
+    <span class="kt">KKStaticContainerItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"folder1"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Folder 1"</span><span class="p">,</span> <span class="nv">children</span><span class="p">:</span> <span class="p">[</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_1_1"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">),</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_1_2"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">),</span>
+        <span class="p">]),</span>
+    <span class="kt">KKStaticContainerItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"folder_2"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Folder 2"</span><span class="p">,</span> <span class="nv">children</span><span class="p">:</span> <span class="p">[</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_2_1"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">),</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_2_2"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">)</span>
+        <span class="p">]),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1">// Create your manager.</span>
+<span class="n">manager</span> <span class="o">=</span> <span class="kt">KKCarPlayManager</span><span class="p">(</span><span class="nv">rootNode</span><span class="p">:</span> <span class="n">rooNode</span><span class="p">)</span>
+
+<span class="c1">// Sets the data source and delegate of MPPlayableContentManager to the manager.</span>
+<span class="n">manager</span><span class="p">?</span><span class="o">.</span><span class="nf">activate</span><span class="p">()</span>
+</code></pre>
+
+<p>Actually these nodes are  instances of <code><a href="Classes/KKBasicContentItem.html">KKBasicContentItem</a></code>. It is a subclass of
+<code>MPContentItem</code>, and you can subclass <code><a href="Classes/KKBasicContentItem.html">KKBasicContentItem</a></code> for your own need.</p>
+<h2 id='items-nodes' class='heading'>Items/Nodes</h2>
+
+<p>We added three methods on <code><a href="Classes/KKBasicContentItem.html">KKBasicContentItem</a></code>:</p>
+
+<ul>
+<li><code><a href="Classes/KKBasicContentItem.html#/s:16KKCarPlayManager18KKBasicContentItemC8childrenSayACGSgvp">KKBasicContentItem.children</a></code>: A list of <code><a href="Classes/KKBasicContentItem.html">KKBasicContentItem</a></code>.</li>
+<li><code><a href="Classes/KKBasicContentItem.html#/s:16KKCarPlayManager18KKBasicContentItemC12loadChildren8callbackyys5Error_pSgc_tKF">KKBasicContentItem.loadChildren(callback:)</a></code>: Ask the item to load its children.</li>
+<li><code><a href="Classes/KKBasicContentItem.html#/s:16KKCarPlayManager18KKBasicContentItemC4play8callbackSbys5Error_pSgc_tKF">KKBasicContentItem.play(callback:)</a></code>: Play the item.</li>
+</ul>
+
+<p>There are two kinds of items/nodes, one is containers while another is playable
+items.</p>
+<h3 id='containers' class='heading'>Containers</h3>
+
+<p>A container could be list a playlist or an album. It has it children. When you
+select a container on the CarPlay screen,
+<code><a href="Classes/KKBasicContentItem.html#/s:16KKCarPlayManager18KKBasicContentItemC12loadChildren8callbackyys5Error_pSgc_tKF">KKBasicContentItem.loadChildren(callback:)</a></code> would be called and the CarPlay
+screen goes to the next level and present its children items in a table UI.</p>
+
+<p>If you want to load children items from a file or from the Internet, subclass a
+KKBasicContentItem, set <code>isPlayable</code> to false and <code>isContainer</code> to true, do your
+loading in <code><a href="Classes/KKBasicContentItem.html#/s:16KKCarPlayManager18KKBasicContentItemC12loadChildren8callbackyys5Error_pSgc_tKF">KKBasicContentItem.loadChildren(callback:)</a></code> and remember to call the
+callback closure.</p>
+
+<p>KKCarPlayManager made a built-in container item type, <code><a href="Classes/KKStaticContainerItem.html">KKStaticContainerItem</a></code>. You
+can just use the class if you have a static list.</p>
+<h3 id='playable-items' class='heading'>Playable Items</h3>
+
+<p>A playable item could be a song track, an audio book and so on. When a playable
+item is selected, the <code><a href="Classes/KKBasicContentItem.html#/s:16KKCarPlayManager18KKBasicContentItemC4play8callbackSbys5Error_pSgc_tKF">KKBasicContentItem.play(callback:)</a></code> method would be
+called and your app should start playing. You should create your own subclasses
+for playable items in your app, since we are hardly to know how your player
+works and creates classes for you.</p>
+
+<p>If there is any error while playing, call the callback closure and pass the
+error, otherwise you can pass <code>nil</code>.</p>
+<h2 id='a-full-carplay-experience' class='heading'>A Full CarPlay Experience</h2>
+
+<p>When you want to enable CarPlay in your audio app,</p>
+
+<ul>
+<li>You need to have a valid provision profile/entitlement, otherwise your app
+won&rsquo;t appear on the CarPlay screen. Please contact Apple.</li>
+<li>You need to enable some commands of <a href="https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter">MPRemoteCommandCenter</a>, otherwise
+<code>MPPlayableContentManager</code> won&rsquo;t call its data source and delegate.</li>
+<li>Enable audio background mode and set the current category of <a href="https://developer.apple.com/documentation/avfoundation/avaudiosession">AVAudioSession</a>
+to <code>.playback</code>, in order to enable background playabck.</li>
+<li>Set up KKCarPlayManager as we mentioned above.</li>
+<li>Once there are changes in your tree, call <code>MPPlayableContentManager.shared().beginUpdates()</code> and
+<code>MPPlayableContentManager.shared().endUpdates()</code>.</li>
+<li>Provide now playing information to <a href="https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter">MPNowPlayingInfoCenter</a>.</li>
+</ul>
+<h2 id='one-more-thing' class='heading'>One More Thing</h2>
+
+<p>On Xcode 11, you can use Swift UI like syntax to construct the node after
+importing <code>KKCarPlayManagerExtensions</code>. For example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">rooNode</span> <span class="o">=</span> <span class="kt">KKStaticContainerItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"root"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Root"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">KKStaticContainerItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"folder1"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Folder 1"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_1_1"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">)</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_1_2"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="kt">KKStaticContainerItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"folder_2"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Folder 2"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_2_1"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">)</span>
+        <span class="kt">PlayItem</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"Song_2_2"</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="s">"Song name"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"song URL..."</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Enjoy! 🚗</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://github.com/KKBOX/KKCarPlayManager" target="_blank" rel="external">zonble</a>. All rights reserved. (Last updated: 2019-07-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

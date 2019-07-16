@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:4.2
 
 import PackageDescription
 
@@ -9,9 +9,6 @@ let package = Package(
         .library(
             name: "KKCarPlayManager",
             targets: ["KKCarPlayManager"]),
-		.library(
-			name: "KKCarPlayManagerExtension",
-			targets: ["KKCarPlayManagerExtensions"]),
 		],
     dependencies: [
         // .package(url: /* package url */, from: "1.0.0"),
@@ -20,9 +17,6 @@ let package = Package(
         .target(
             name: "KKCarPlayManager",
             dependencies: []),
-        .target(
-            name: "KKCarPlayManagerExtensions",
-            dependencies: ["KKCarPlayManager"]),
         .testTarget(
             name: "KKCarPlayManagerTests",
             dependencies: ["KKCarPlayManager"]),

@@ -1,5 +1,7 @@
 # KKCarPlayManager
 
+2019 © KKBOX International.
+
 **KKCarPlayManager** provides a simple, clear and declarative way to implement
 the functionalities of [CarPlay](https://www.apple.com/ios/carplay/).
 
@@ -12,6 +14,16 @@ the functionalities of [CarPlay](https://www.apple.com/ios/carplay/).
 ## Installation
 
 You can install the package via Swift Package Manager or CocoaPods.
+
+### CocoaPods
+
+Add `KKCarPlayManager` to your pod file, then run `pod install`.
+
+### Swift Package Manager
+
+Just add `https://github.com/KKBOX/KKCarPlayManager.git` to your `Package.swift`
+file, or, you can add the package in Xcode 11 by selecting "File" -> "Swift
+Packages" -> "Add Package Dependency".
 
 ## Example
 
@@ -71,9 +83,9 @@ Actually these nodes are  instances of `KKBasicContentItem`. It is a subclass of
 
 We added three methods on `KKBasicContentItem`:
 
-- `children`: A list of `KKBasicContentItem`.
-- `loadChildren(callback:)`: Ask the item to load its children.
-- `play(callback:)`: Play the item.
+- `KKBasicContentItem.children`: A list of `KKBasicContentItem`.
+- `KKBasicContentItem.loadChildren(callback:)`: Ask the item to load its children.
+- `KKBasicContentItem.play(callback:)`: Play the item.
 
 There are two kinds of items/nodes, one is containers while another is playable
 items.
@@ -81,13 +93,14 @@ items.
 ### Containers
 
 A container could be list a playlist or an album. It has it children. When you
-select a container on the CarPlay screen, `loadChildren(callback:)` would be
-called and the CarPlay screen goes to the next level and present its children
-items in a table UI.
+select a container on the CarPlay screen,
+`KKBasicContentItem.loadChildren(callback:)` would be called and the CarPlay
+screen goes to the next level and present its children items in a table UI.
 
 If you want to load children items from a file or from the Internet, subclass a
 KKBasicContentItem, set `isPlayable` to false and `isContainer` to true, do your
-loading in `loadChildren(callback:)` and remember to call the callback closure.
+loading in `KKBasicContentItem.loadChildren(callback:)` and remember to call the
+callback closure.
 
 KKCarPlayManager made a built-in container item type, `KKStaticContainerItem`. You
 can just use the class if you have a static list.
@@ -95,10 +108,10 @@ can just use the class if you have a static list.
 ### Playable Items
 
 A playable item could be a song track, an audio book and so on. When a playable
-item is selected, the `play(callback:)` method would be called and your app
-should start playing. You should create your own subclasses for playable items
-in your app, since we are hardly to know how your player works and creates
-classes for you.
+item is selected, the `KKBasicContentItem.play(callback:)` method would be
+called and your app should start playing. You should create your own subclasses
+for playable items in your app, since we are hardly to know how your player
+works and creates classes for you.
 
 If there is any error while playing, call the callback closure and pass the
 error, otherwise you can pass `nil`.

@@ -19,6 +19,7 @@ public enum KKCarPlayManagerError : Error, LocalizedError {
 	}
 }
 
+/// A class helps your to build a tree structure of playable items for CarPlay.
 public class KKCarPlayManager: NSObject {
 
 	/// Set the data source and delegate of MPPlayableContentManager to
@@ -70,11 +71,13 @@ public class KKCarPlayManager: NSObject {
 		return node
 	}
 
+	/// :nodoc:
 	public func commitCurrentPlaybackCallbackWithMessage(_ message: String) -> Bool {
 		let error = KKCarPlayManagerError.message(message)
 		return self.commitCurrentPlaybackCallback(error)
 	}
 
+	/// :nodoc:
 	@objc public final func commitCurrentPlaybackCallback(_ error: Error?) -> Bool {
 		NSObject.cancelPreviousPerformRequests(withTarget: self)
 		if let callback = currentPlaybackCallback {
@@ -87,6 +90,7 @@ public class KKCarPlayManager: NSObject {
 		return false
 	}
 
+	/// :nodoc:
 	public final func delayedCommitCurrentPlaybackCallbackWithourError() {
 		NSObject.cancelPreviousPerformRequests(withTarget: self)
 		self.perform(#selector(KKCarPlayManager.commitCurrentPlaybackCallback(_:)), with: nil, afterDelay: 0.5)
