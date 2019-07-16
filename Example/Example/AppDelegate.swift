@@ -1,6 +1,7 @@
 import UIKit
 import KKCarPlayManager
 import MediaPlayer
+import AVFoundation
 
 func appDelegate() -> AppDelegate {
 	return UIApplication.shared.delegate as! AppDelegate
