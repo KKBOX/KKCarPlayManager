@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				PlayItem(identifier: "Song_1_2", title: "回向", url: "https://zonble.net/MIDI/return.mp3"),
 				]),
 			KKStaticContainerItem(identifier: "folder_2", title: "Folder 2", children: [
-				PlayItem(identifier: "Song_2_1", title: "天狗", url: "https://zonble.net/MIDI/tiengo.mp3"),
-				PlayItem(identifier: "Song_2_2", title: "回向", url: "https://zonble.net/MIDI/return.mp3")
+				PlayItem(identifier: "Song_2_1", title: "orz", url: "https://zonble.net/MIDI/orz.mp3"),
+				PlayItem(identifier: "Song_2_2", title: "藿香薊", url: "https://zonble.net/MIDI/ageratum_conyzoides.mp3")
 				]),
 			]
 		)

@@ -4,10 +4,13 @@ import AVFoundation
 typealias PlayableItem = (String, String)
 
 class ViewController: UITableViewController {
-	var items:[[PlayableItem]] = [[
-		("天狗", "https://zonble.net/MIDI/tiengo.mp3"),
-		("回向", "https://zonble.net/MIDI/return.mp3"),
-		]
+	var items:[[PlayableItem]] = [
+		[
+			("天狗", "https://zonble.net/MIDI/tiengo.mp3"),
+			("回向", "https://zonble.net/MIDI/return.mp3")],
+		[
+			("orz", "https://zonble.net/MIDI/orz.mp3"),
+			("藿香薊", "https://zonble.net/MIDI/ageratum_conyzoides.mp3")]
 	]
 
 	override func viewDidLoad() {
@@ -39,4 +42,3 @@ class ViewController: UITableViewController {
 		}
 	}
 }
-

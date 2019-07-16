@@ -3,7 +3,7 @@ import Foundation
 /// A container item with static children.
 public class KKStaticContainerItem: KKBasicContentItem {
 
-	var staticChildren: [KKBasicContentItem]
+	private var staticChildren: [KKBasicContentItem]
 
 	/// Creates an instance.
 	///
