@@ -89,13 +89,51 @@ If you want to load children items from a file or from the Internet, subclass a
 KKBasicContentItem, set `isPlayable` to false and `isContainer` to true, do your
 loading in `loadChildren(callback:)` and remember to call the callback closure.
 
-KKCarPlayManager made a built-in container item type, KKStaticContainerItem. You
+KKCarPlayManager made a built-in container item type, `KKStaticContainerItem`. You
 can just use the class if you have a static list.
 
 ### Playable Items
 
 A playable item could be a song track, an audio book and so on. When a playable
-item is selected, the `play(callback:)` method would be called. You should
-create your own subclasses for playable items in your app, since we are hardly
-to know how your player works and creates classes for you.
+item is selected, the `play(callback:)` method would be called and your app
+should start playing. You should create your own subclasses for playable items
+in your app, since we are hardly to know how your player works and creates
+classes for you.
 
+If there is any error while playing, call the callback closure and pass the
+error, otherwise you can pass `nil`.
+
+## A Full CarPlay Experience
+
+When you want to enable CarPlay in your audio app,
+
+- You need to have a valid provision profile/entitlement, otherwise your app
+  won't appear on the CarPlay screen. Please contact Apple.
+- You need to enable some commands of [MPRemoteCommandCenter](https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter), otherwise
+  `MPPlayableContentManager` won't call its data source and delegate.
+- Enable audio background mode and set the current category of [AVAudioSession](https://developer.apple.com/documentation/avfoundation/avaudiosession)
+  to `.playback`, in order to enable background playabck.
+- Set up KKCarPlayManager as we mentioned above.
+- Once there are changes in your tree, call `MPPlayableContentManager.shared().beginUpdates()` and
+  `MPPlayableContentManager.shared().endUpdates()`.
+- Provide now playing information to [MPNowPlayingInfoCenter](https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter).
+
+## One More Thing
+
+On Xcode 11, you can use Swift UI like syntax to construct the node after
+importing `KKCarPlayManagerExtensions`. For example:
+
+``` swift
+let rooNode = KKStaticContainerItem(identifier: "root", title: "Root") {
+    KKStaticContainerItem(identifier: "folder1", title: "Folder 1") {
+        PlayItem(identifier: "Song_1_1", title: "Song name", url: "song URL...")
+        PlayItem(identifier: "Song_1_2", title: "Song name", url: "song URL...")
+    }
+    KKStaticContainerItem(identifier: "folder_2", title: "Folder 2") {
+        PlayItem(identifier: "Song_2_1", title: "Song name", url: "song URL..."),
+        PlayItem(identifier: "Song_2_2", title: "Song name", url: "song URL...")
+    }
+}
+```
+
+Enjoy! 🚗

@@ -12,6 +12,7 @@ KKCarPlayManager helps you to build the tree of the content items to let users t
   s.source           = { :git => 'https://github.com/zonble/KKCarPlayManager.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
+  s.swift_versions = ['4.2', '5.0', '5.1']
 
   s.subspec 'KKCarPlayManager' do |sp|
     sp.source_files = 'Sources/KKCarPlayManager/**/*'
