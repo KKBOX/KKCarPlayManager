@@ -19,9 +19,9 @@ class PlayItem: KKBasicContentItem {
 		isPlayable = true
 	}
 
-	override func play(completionHandler: @escaping (Error?) -> Void) throws -> Bool {
+	override func play(callback: @escaping (Error?) -> Void) throws -> Bool {
 		guard let url = url else {
-			completionHandler(PlayItemError.noURL)
+			callback(PlayItemError.noURL)
 			return false
 		}
 		appDelegate().player.replaceCurrentItem(with: AVPlayerItem(url: url))
@@ -31,7 +31,7 @@ class PlayItem: KKBasicContentItem {
 			MPMediaItemPropertyTitle: self.title ?? "",
 			MPMediaItemPropertyArtist: "zonble"
 		]
-		completionHandler(nil)
+		callback(nil)
 		return true
 	}
 }

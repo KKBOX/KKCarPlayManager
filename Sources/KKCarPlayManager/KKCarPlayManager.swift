@@ -156,7 +156,7 @@ extension KKCarPlayManager: MPPlayableContentDelegate {
 			self?.currentPlaybackCallback?(nil)
 			self?.currentPlaybackCallback = completionHandler
 			do {
-				let shouldCleanCachedCallback = try currentNode.play(completionHandler: completionHandler)
+				let shouldCleanCachedCallback = try currentNode.play(callback: completionHandler)
 				if shouldCleanCachedCallback {
 					self?.currentPlaybackCallback = nil
 				}

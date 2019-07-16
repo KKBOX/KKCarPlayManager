@@ -21,7 +21,7 @@ open class KKBasicContentItem: MPContentItem {
 	}
 
 	/// To play the media mapping to the item.
-	open func play(completionHandler: @escaping (Error?) -> Void) throws -> Bool {
+	open func play(callback: @escaping (Error?) -> Void) throws -> Bool {
 		fatalError("Not implemented")
 	}
 }
