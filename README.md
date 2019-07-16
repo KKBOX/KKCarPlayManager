@@ -130,7 +130,7 @@ let rooNode = KKStaticContainerItem(identifier: "root", title: "Root") {
         PlayItem(identifier: "Song_1_2", title: "Song name", url: "song URL...")
     }
     KKStaticContainerItem(identifier: "folder_2", title: "Folder 2") {
-        PlayItem(identifier: "Song_2_1", title: "Song name", url: "song URL..."),
+        PlayItem(identifier: "Song_2_1", title: "Song name", url: "song URL...")
         PlayItem(identifier: "Song_2_2", title: "Song name", url: "song URL...")
     }
 }
