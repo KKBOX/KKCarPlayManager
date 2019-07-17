@@ -38,7 +38,7 @@ public class KKCarPlayManager: NSObject {
 	}
 
 	/// The root node of KKCarPlayManager.
-	final var rootNode: KKBasicContentItem {
+	public final var rootNode: KKBasicContentItem {
 		didSet {
 			MPPlayableContentManager.shared().beginUpdates()
 			MPPlayableContentManager.shared().endUpdates()
