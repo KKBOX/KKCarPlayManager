@@ -42,9 +42,14 @@ class ViewController: UITableViewController {
 			appDelegate().player.replaceCurrentItem(with: AVPlayerItem(url: url))
 			appDelegate().player.play()
 			MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-				MPMediaItemPropertyPersistentID: 0,
+				MPNowPlayingInfoPropertyPlaybackRate: 1,
 				MPMediaItemPropertyTitle: name,
-				MPMediaItemPropertyArtist: "zonble"
+				MPMediaItemPropertyArtist: "zonble",
+				MPMediaItemPropertyAlbumTitle: "zonble",
+				MPNowPlayingInfoPropertyElapsedPlaybackTime: 0,
+				MPMediaItemPropertyPlaybackDuration: 100,
+				MPNowPlayingInfoPropertyPlaybackQueueCount: 1,
+				MPNowPlayingInfoPropertyPlaybackQueueIndex: 0
 			]
 		}
 	}

@@ -14,15 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var player = AVPlayer()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		let vc = ViewController(style: .grouped)
-		let nav = UINavigationController(rootViewController: vc)
-		window = UIWindow(frame: UIScreen.main.bounds)
-		window?.rootViewController = nav
-		window?.makeKeyAndVisible()
 
 		MPRemoteCommandCenter.shared().playCommand.addTarget { event in
 			return .success
 		}
+		MPRemoteCommandCenter.shared().pauseCommand.addTarget { event in
+			return .success
+		}
+		MPRemoteCommandCenter.shared().stopCommand.addTarget { event in
+			return .success
+		}
+		MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget { event in
+			return .success
+		}
+		MPRemoteCommandCenter.shared().previousTrackCommand.addTarget { event in
+			return .success
+		}
+		MPRemoteCommandCenter.shared().nextTrackCommand.addTarget { event in
+			return .success
+		}
+		application.beginReceivingRemoteControlEvents()
+
 
 		let rooNode = KKStaticContainerItem(identifier: "root", title: "Root", children: [
 			KKStaticContainerItem(identifier: "folder1", title: "Folder 1", children: [
@@ -40,6 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		try? AVAudioSession.sharedInstance().setCategory(.playback)
 		try? AVAudioSession.sharedInstance().setActive(true, options: [])
+
+		let vc = ViewController(style: .grouped)
+		let nav = UINavigationController(rootViewController: vc)
+		window = UIWindow(frame: UIScreen.main.bounds)
+		window?.rootViewController = nav
+		window?.makeKeyAndVisible()
+
 		return true
 	}
 }

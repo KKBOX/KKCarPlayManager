@@ -27,9 +27,14 @@ class PlayItem: KKBasicContentItem {
 		appDelegate().player.replaceCurrentItem(with: AVPlayerItem(url: url))
 		appDelegate().player.play()
 		MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-			MPMediaItemPropertyPersistentID: 0,
+			MPNowPlayingInfoPropertyPlaybackRate: 1,
 			MPMediaItemPropertyTitle: self.title ?? "",
-			MPMediaItemPropertyArtist: "zonble"
+			MPMediaItemPropertyArtist: "zonble",
+			MPMediaItemPropertyAlbumTitle: "zonble",
+			MPNowPlayingInfoPropertyElapsedPlaybackTime: 0,
+			MPMediaItemPropertyPlaybackDuration: 100,
+			MPNowPlayingInfoPropertyPlaybackQueueCount: 1,
+			MPNowPlayingInfoPropertyPlaybackQueueIndex: 0
 		]
 		callback(nil)
 		return true
