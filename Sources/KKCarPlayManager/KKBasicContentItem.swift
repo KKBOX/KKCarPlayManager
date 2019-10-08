@@ -2,6 +2,9 @@ import Foundation
 import MediaPlayer
 
 /// KKBOX's own subclass of MPContentItem.
+///
+/// Please subclass the class and override `loadChildren(callback:)` or
+/// `play(callback:)` for your own need.
 open class KKBasicContentItem: MPContentItem {
 
 	/// Childten items of the item. We use this property to build a tree and
@@ -29,7 +32,7 @@ open class KKBasicContentItem: MPContentItem {
 extension KKBasicContentItem {
 
 	/// Apply an image to the current item.
-	public func apply(image: UIImage?) -> KKBasicContentItem {
+	public func apply(image: UIImage?) -> Self {
 		if let image = image {
 			self.artwork = MPMediaItemArtwork(image: image)
 		} else {
