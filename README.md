@@ -1,6 +1,10 @@
 # KKCarPlayManager
 
-2019 © KKBOX International.
+[![Actions Status](https://github.com/KKBOX/KKCarPlayManager/workflows/Build/badge.svg)](https://github.com/KKBOX/KKCarPlayManager/actions)
+[![CocoaPods](http://img.shields.io/cocoapods/v/KKCarPlayManager.svg?style=flat)](http://cocoapods.org/pods/KKCarPlayManager)
+[![Support](https://img.shields.io/badge/iOS-8-blue.svg)](https://www.apple.com/tw/ios)
+
+2019 © KKBOX.
 
 **KKCarPlayManager** provides a simple, clear and declarative way to implement
 the functionalities of [CarPlay](https://www.apple.com/ios/carplay/).

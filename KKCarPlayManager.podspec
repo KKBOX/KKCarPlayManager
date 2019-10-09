@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'KKCarPlayManager'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'Helps to implement an CarPlay audio app.'
   s.description      = <<-DESC
 KKCarPlayManager helps you to build the tree of the content items to let users to browsw on a CarPlay audio app.
